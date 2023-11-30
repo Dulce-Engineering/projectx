@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - neXcommerce</title>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="./styles/Sign_In.css" />
+    <link type="text/css" rel="stylesheet" href="/styles/Input_Simple.css" />
+
+    <style>
+      .input-box
+      {
+        margin-top: 18px;
+        display: block;
+      }
+      .input-box .input-1
+      {
+        width: 100%;
+      }
+    </style>
+
+    <script type="module">
+      import Utils from "./lib/Utils.js";
+      import Context from "./lib/Context.js";
+      import Login_Layout from "./components/Login_Layout.js";
+      import Sign_In from "./components/Sign_In.js";
+
+      Main();
+      async function Main()
+      {
+        const ctx = new Context();
+        await ctx.Init();
+
+        sign_in.ctx = ctx;
+        sign_in.addEventListener("signinok", On_Sign_In_Ok);
+      }
+
+      async function On_Sign_In_Ok(event)
+      {
+        const stores = await Project.Select_All_By_User(event.detail.user.uid);
+        if (!stores)
+        {
+          window.location.href = "./create_store.html";
+        }
+        else
+        {
+          window.location.href = "./index.html";
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <login-layout hidden>
+      <h1>Log in with your email</h1>
+      <p class="mt-5">
+        Don’t have an accout yet?
+        <a href="./sign_up.html" class="text-link">Sign up here</a>
+      </p>
+
+      <sign-in id="sign_in"></sign-in>
+    </login-layout>
+  </body>
+
+</html>

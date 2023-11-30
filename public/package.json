@@ -1,0 +1,18 @@
+{
+    "type": "module",
+    "name": "project-x-frontend",
+    "version": "1.0.0",
+    "description": "Project X Frontend",
+    "main": "index.html",
+    "scripts": {
+      "start": "firebase serve --only hosting --port 80",
+      "deploy": "firebase deploy --only hosting",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Dulce Engineering",
+    "dependencies": {
+      "filter-buddy": "^1.1.3",
+      "menu-buddy": "^1.5.0",
+      "table-buddy": "^1.1.5"
+    }
+  }
