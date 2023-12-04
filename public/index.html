@@ -19,30 +19,38 @@
     <script type="module">
       //import Utils from "/lib/Utils.js";
       //import JW_Utils from "/lib/JW_Utils.js";
-      import DE_Header from "/component/DE_Header.mjs";
+      import Admin from "/lib/Admin.js";
+      import "/component/DE_Header.mjs";
 
       main();
       async function main()
       {
-        //console.log("index.main()")
-        //await JW_Utils.Import_API();
-        let url_str = "/pages/dashboard.html";
-
-        const params = new URLSearchParams(location.search);
-        if (params.has('view'))
+        if (!Admin.Is_Logged_In())
         {
-          const view = params.get("view");
-          params.delete("view");
-          url_str = "/pages/" + view + "?" + params.toString();
+          window.open("page/login.html", "_self");
         }
+        else
+        {
+          //console.log("index.main()")
+          //await JW_Utils.Import_API();
+          let url_str = "";
 
-        jw_frame.src = url_str;
+          const params = new URLSearchParams(location.search);
+          if (params.has('view'))
+          {
+            const view = params.get("view");
+            params.delete("view");
+            url_str = "/page/" + view + ".html?" + params.toString();
+          }
+
+          page_frame.src = url_str;
+        }
       }
     </script>
   </head>
 
   <body>
-    <de-header id="DE_Header" frame-id="jw_frame"></de-header>
-    <iframe id="jw_frame"></iframe>
+    <de-header id="DE_Header" frame-id="page_frame"></de-header>
+    <iframe id="page_frame"></iframe>
   </body>
 </html>

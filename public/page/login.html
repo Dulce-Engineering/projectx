@@ -3,67 +3,142 @@
 
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - neXcommerce</title>
-    <link rel="stylesheet" href="./styles/base.css" />
-    <link rel="stylesheet" href="./styles/login.css" />
-    <link rel="stylesheet" href="./styles/Sign_In.css" />
-    <link type="text/css" rel="stylesheet" href="/styles/Input_Simple.css" />
+    <title>Login - Project X</title>
 
+    <link rel="stylesheet" href="../style/main.css" />
+    <link rel="stylesheet" href="../style/DE_Login.css" />
     <style>
-      .input-box
-      {
-        margin-top: 18px;
-        display: block;
-      }
-      .input-box .input-1
-      {
-        width: 100%;
-      }
     </style>
 
     <script type="module">
-      import Utils from "./lib/Utils.js";
-      import Context from "./lib/Context.js";
-      import Login_Layout from "./components/Login_Layout.js";
-      import Sign_In from "./components/Sign_In.js";
+      import '/__/firebase/9.4.0/firebase-app-compat.js';
+      import '/__/firebase/9.4.0/firebase-auth-compat.js';
+      import '/__/firebase/init.js?useEmulator=true';
+      //import Utils from "../lib/Utils.js";
+      import Admin from "../lib/Admin.js";
+      //import Context from "./lib/Context.js";
+      //import Login_Layout from "./components/Login_Layout.js";
+      //import Sign_In from "./components/Sign_In.js";
+      import "../component/DE_Login.mjs";
 
       Main();
       async function Main()
       {
-        const ctx = new Context();
-        await ctx.Init();
+        await Admin.Import_API();
 
-        sign_in.ctx = ctx;
-        sign_in.addEventListener("signinok", On_Sign_In_Ok);
+        login_elem.addEventListener("signup", On_Click_Sign_Up);
+        login_elem.addEventListener("signin", On_Click_Sign_In);
+        login_elem.addEventListener("signin-google", On_Click_Google);
       }
 
-      async function On_Sign_In_Ok(event)
+      async function On_Click_Google()
       {
-        const stores = await Project.Select_All_By_User(event.detail.user.uid);
-        if (!stores)
+        const user_details = login_elem.value;
+        const fb_auth = firebase.auth();
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        try
         {
-          window.location.href = "./create_store.html";
+          const cred = await fb_auth.signInWithPopup(provider);
+          if (cred)
+          {
+            const user_details = 
+            {
+              id: cred.user.uid,
+              displayName: cred.user.displayName,
+              email: cred.user.email
+            };
+            User.Sign_In(user_details);
+
+            Admin.Set_User(cred.user);
+            login_elem.Show_Success("Successfull");
+            window.location.href = "../index.html";
+          }
+        }
+        catch (error)
+        {
+          Set_And_Show_Error(error.code);
+        }
+      }
+
+      async function On_Click_Sign_In()
+      {
+        const user_details = login_elem.value;
+        const fb_auth = firebase.auth();
+        try
+        {
+          const cred = await fb_auth.signInWithEmailAndPassword(user_details.email, user_details.password);
+          if (cred)
+          {
+            Admin.Set_User(cred.user);
+            login_elem.Show_Success("Successfull");
+            window.location.href = "../index.html";
+          }
+        }
+        catch (error)
+        {
+          Set_And_Show_Error(error.code);
+        }
+      }
+
+      async function On_Click_Sign_Up()
+      {
+        const user_details = login_elem.value;
+        const user_id = await User.Create(user_details);
+        if (user_id) 
+        {
+          const fb_auth = firebase.auth();
+          const cred = await fb_auth.signInWithEmailAndPassword(user_details.email, user_details.password);
+          if (cred)
+          {
+            Admin.Set_User(cred.user);
+            login_elem.Show_Success("Successfull");
+            window.location.href = "../index.html";
+          }
         }
         else
         {
-          window.location.href = "./index.html";
+          Set_And_Show_Error(User.last_rpc.error.code);
+        }
+      } 
+
+      function Set_And_Show_Error(code) 
+      {
+        switch (code) 
+        {
+          case "auth/invalid-login-credentials":
+            login_elem.Show_Error("Invalid Credentials");
+            break;
+
+          case "auth/email-already-exists":
+            login_elem.Show_Error("Email Already Exists");
+            break;
+
+          case "auth/invalid-email":
+            login_elem.Show_Error("Invalid Email");
+            break;
+
+          case "auth/invalid-password":
+            login_elem.Show_Error("Invalid Password");
+            break;
+
+          case "auth/weak-password":
+            login_elem.Show_Error(
+              "Use 6 or more characters with a mix of letters, numbers  & symbols"
+            );
+            break;
+
+          default:
+            login_elem.Show_Error("Something went wrong!");
         }
       }
     </script>
   </head>
 
   <body>
-    <login-layout hidden>
-      <h1>Log in with your email</h1>
-      <p class="mt-5">
-        Don’t have an accout yet?
-        <a href="./sign_up.html" class="text-link">Sign up here</a>
-      </p>
-
-      <sign-in id="sign_in"></sign-in>
-    </login-layout>
+    <de-login id="login_elem">
+    </de-login>
   </body>
 
 </html>

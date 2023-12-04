@@ -1,0 +1,80 @@
+de-login
+{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+de-login article
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+de-login .new
+{
+  margin: 16px 0 0 0;
+}
+de-login .new a
+{
+  font-weight: 600;
+  line-height: 20px;
+  text-decoration-line: underline;
+  color: #54349F;
+  cursor: pointer;
+}
+
+de-login [cid=google_btn]
+{
+  margin-top: 26px;  
+}
+de-login [cid=google_btn]::before
+{
+  content: url(../image/google-logo.svg);
+  font-size: 0;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+de-login [cid=facebook_btn]::before
+{
+  content: url(../image/facebook-logo.svg);
+  font-size: 0;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+de-login [cid=apple_btn]::before
+{
+  content: url(../image/apple-logo.svg);
+  font-size: 0;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+de-login .or
+{
+  font-weight: 600;
+  width: 100%;
+  color: #706D81;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 26px;
+}
+de-login .or hr
+{
+  width: 100%;
+  border: 0.5px solid #D7D5DD;
+  position: absolute;
+}
+de-login .or span
+{
+  z-index: 1;
+  background-color: #fff;
+  padding: 0 16px;
+}
