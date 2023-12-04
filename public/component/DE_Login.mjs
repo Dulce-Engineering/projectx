@@ -42,7 +42,10 @@ class DE_Login extends HTMLElement
     }
     else if (this?.forgot_panel?.hidden === false)
     {
-      
+      res = 
+      {
+        email: this.forgot_email_input.value,
+      };
     }
 
     return res;
@@ -60,14 +63,17 @@ class DE_Login extends HTMLElement
     if (!this?.login_panel?.hidden)
     {
       this.login_error.innerText = msg;
+      this.login_success.innerText = "";
     }
     else if (!this?.signup_panel?.hidden)
     {
       this.signup_error.innerText = msg;
+      this.signup_success.innerText = "";
     }
     else if (!this?.forgot_panel?.hidden)
     {
-      
+      this.forgot_error.innerText = msg;
+      this.forgot_success.innerText = "";
     }
   }
 
@@ -76,14 +82,17 @@ class DE_Login extends HTMLElement
     if (!this?.login_panel?.hidden)
     {
       this.login_success.innerText = msg;
+      this.login_error.innerText = "";
     }
     else if (!this?.signup_panel?.hidden)
     {
       this.signup_success.innerText = msg;
+      this.signup_error.innerText = "";
     }
     else if (!this?.forgot_panel?.hidden)
     {
-      
+      this.forgot_success.innerText = msg;
+      this.forgot_error.innerText = "";
     }
   }
 
@@ -114,6 +123,11 @@ class DE_Login extends HTMLElement
   On_Click_Sign_Up(event) 
   {
     this.dispatchEvent(new Event("signup"));
+  }
+
+  On_Click_Forgot(event) 
+  {
+    this.dispatchEvent(new Event("forgot"));
   }
 
   // rendering ==========================================================================
@@ -166,7 +180,10 @@ class DE_Login extends HTMLElement
         </p>
 
         <div><label>Your Email</label><input cid="forgot_email_input" type="email"></div>
-        <button cid="xlogin_btn">Send Reset Email</button>
+        <button cid="forgot_btn">Send Reset Email</button>
+
+        <span cid="forgot_error"></span>
+        <span cid="forgot_success"></span>
       </div>
 
       <div cid="reset_panel" hidden>
@@ -180,6 +197,7 @@ class DE_Login extends HTMLElement
     this.google_btn.addEventListener("click", this.On_Click_Google);
     this.login_btn.addEventListener("click", this.On_Click_Sign_In);
     this.create_btn.addEventListener("click", this.On_Click_Sign_Up);
+    this.forgot_btn.addEventListener("click", this.On_Click_Forgot);
 
     this.signup_link.addEventListener("click", this.On_Click_Show_Sign_Up);
     this.forgot_link.addEventListener("click", this.On_Click_Show_Forgot);
