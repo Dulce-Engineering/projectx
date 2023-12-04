@@ -10,8 +10,8 @@ const config =
   },
   default:
   {
-    api_client_url: "https://api-u7uynejwbq-ts.a.run.app/rpc-client",
-    api_server_host: "https://api-u7uynejwbq-ts.a.run.app",
+    api_client_url: "https://api-g2to2hik3a-ts.a.run.app/rpc-client",
+    api_server_host: "https://api-g2to2hik3a-ts.a.run.app",
     inactivity_timeout_ms: 1200000000,
     signout_timeout_ms: 60000000,
   },

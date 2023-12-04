@@ -1,8 +1,8 @@
 import Utils from "../lib/Utils.js";
-import '/__/firebase/9.4.0/firebase-app-compat.js';
-import '/__/firebase/9.4.0/firebase-auth-compat.js';
-import '/__/firebase/init.js?useEmulator=true';
-import MB_Dlg_Btn from "/node_modules/menu-buddy/MB_Dlg_Btn.mjs";
+//import '/__/firebase/9.4.0/firebase-app-compat.js';
+//import '/__/firebase/9.4.0/firebase-auth-compat.js';
+//import '/__/firebase/init.js?useEmulator=true';
+//import MB_Dlg_Btn from "/node_modules/menu-buddy/MB_Dlg_Btn.mjs";
 
 class DE_Header extends HTMLElement 
 {
@@ -94,13 +94,12 @@ class DE_Header extends HTMLElement
     this.innerHTML = `
       <div>
         <mb-dlg-btn cid="menu_elem"></mb-dlg-btn>
-        <img src="/images/favicon/apple-touch-icon.png" class="logo">
-        Job Woper <span cid="subtitle_elem"></span>
+        Project X <span cid="subtitle_elem"></span>
       </div>
     `;
     Utils.Set_Id_Shortcuts(this, this, "cid");
 
-    const menu_options =
+    /*const menu_options =
     [
       { id: 1, title: "Dashboard", click: this.On_Click_Dashboard},
       { id: 2, title: "Queries", click: this.On_Click_View_Queries},
@@ -112,7 +111,7 @@ class DE_Header extends HTMLElement
       { id: 8, title: "Sign In", click: this.On_Click_View_Sign_In},
       { id: 9, title: "Sign Out", click: this.On_Click_Sign_Out},
     ];
-    this.menu_elem.options_flat = menu_options;
+    this.menu_elem.options_flat = menu_options;*/
   }
 }
 
