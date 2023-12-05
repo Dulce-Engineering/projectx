@@ -108,6 +108,7 @@ class Db_Firestore
       {
         //const class_obj = new class_type(obj);
         const class_obj = await this.To_Class(obj, class_type);
+        console.log("class_obj: ", class_obj);
         res.push(class_obj);
       }
     }
@@ -179,6 +180,7 @@ class Db_Firestore
       {
         const obj = row.data();
         obj.id = row.id;
+        //console.log("obj: ", obj);
         res.push(obj);
       }
     }
@@ -279,11 +281,12 @@ class Db_Firestore
       const table = this.db.collection(table_name);
       try 
       {
-          for (const row of rows)
-          {
-            const doc_ref = await table.add(row);
-            res.push(doc_ref.id);
-          }
+        for (const row of rows)
+        {
+          console.log("row: ", row);
+          const doc_ref = await table.add(row);
+          res.push(doc_ref.id);
+        }
       }
       catch (e)
       {
@@ -629,7 +632,9 @@ class Db_Firestore
     }
     else
     {
-      class_obj = new class_type(db_obj);
+      //class_obj = new class_type(db_obj);
+      class_obj = new class_type();
+      Object.assign(class_obj, db_obj);
     }
 
     return class_obj;

@@ -35,7 +35,7 @@ class User
       user.name = user_details.displayName;
       user.email = user_details.email;
       user.status = "active";
-      res = user.Save(db);
+      res = await user.Save(db);
     }
 
     return res;
@@ -54,7 +54,7 @@ class User
       user.name = user_details.displayName;
       user.email = user_details.email;
       user.status = "active";
-      res = user.Save(db);
+      res = await user.Save(db);
 
       //fb_auth.sendEmailVerification(fb_user);
     }

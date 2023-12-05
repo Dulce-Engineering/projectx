@@ -4,29 +4,27 @@ class Admin
 {
   static token_prefix_length = "Firebase ".length;
 
-  static async Token(req, fb_auth)
+  static async UID(req, fb_auth)
   {
-    let token = null;
-
-    const auth = req.headers.authorization;
-    if (auth)
-    {
-      const token_str = auth.substring(Admin.token_prefix_length);
-      token = await fb_auth.verifyIdToken(token_str);
-    }
-  
-    return token;
+    const token = await Admin.Token(req, fb_auth);
+    return token?.uid;
   }
 
   static async Has_Auth(req, fb_auth)
   {
-    let res = false;
+    const token = await Admin.Token(req, fb_auth);
+    //console.log("token: ", token);
+    return token && token.uid != null && token.uid != undefined;
+  }
+  
+  static async Token(req, fb_auth)
+  {
+    let token = null;
 
     const auth = req.headers?.authorization;
     if (auth)
     {
       const token_str = auth.substring(Admin.token_prefix_length);
-      let token = null;
 
       try
       {
@@ -36,14 +34,9 @@ class Admin
       {
         console.error(error);
       }
-
-      if (token)
-      {
-        res = token.uid == "SCUdO8l5nRgseWcCmcEHpgQD5Kq1";
-      }
     }
-
-    return res;
+  
+    return token;
   }
 
   static async Refresh_Token(user)

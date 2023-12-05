@@ -7,6 +7,7 @@
     "scripts": {
       "start": "firebase serve --only hosting --port 80",
       "deploy": "firebase deploy --only hosting",
+      "publish": "firebase deploy --only hosting",
       "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Dulce Engineering",

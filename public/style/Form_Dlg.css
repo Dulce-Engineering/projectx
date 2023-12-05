@@ -1,0 +1,26 @@
+form-dlg button
+{
+  display: flex;
+  width: 167px;
+  padding: 16px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  background: #6941C7;
+
+  color: #FFF;
+  line-height: 20px; /* 125% */
+  letter-spacing: 0.25px;
+}
+
+form-dlg footer
+{
+  display: flex;
+}
+
+form-dlg form-buddy
+{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
