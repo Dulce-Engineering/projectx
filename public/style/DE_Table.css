@@ -1,0 +1,36 @@
+de-table table
+{
+  display: block;
+}
+de-table thead
+{
+  display: none;
+}
+de-table tbody
+{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+de-table tbody tr
+{
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  border: 1px solid #DEDFE2;
+  background: #FFF;
+  box-shadow: 0px 1px 2px 0px #E5E9EB;
+  padding: 12px;
+}
+de-table tbody td label
+{
+  color: #050B13;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 141.176% */
+  letter-spacing: 0.204px;
+  margin: 0 12px 0 0;
+  text-transform: uppercase;
+}
