@@ -7,19 +7,112 @@
       {
         display: flex;
         flex-direction: column;
+        height: 100%;
+      }
+      main
+      {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
       }
       iframe
       {
-        border: none;
-        width: 100%;
+        border: 1px solid #f00;
+        margin: 0;
+        padding: 0;
         flex-grow: 1;
+      }
+      nav
+      {
+        width: 280px;
+        min-width: 280px;
+        background: #050B13;
+        display: flex;
+        color: #7C8592;
+      }
+      nav img
+      {
+        width: 18px;
+        height: 18px;
+        margin: 0 16px 0 0;
+      }
+
+      menu
+      {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 20px 0 20px 0;
+        flex-grow: 1;
+      }
+      menu.sub
+      {
+        display: none;
+      }
+      menu header
+      {
+        xdisplay: flex;
+        height: 64px;
+        xpadding: 12px 40px 12px 40px;
+        xalign-items: center;
+      }
+      menu li
+      {
+        display: flex;
+        height: 24px;
+        padding: 12px 40px 12px 40px;
+        align-items: center;
+
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; /* 141.176% */
+        letter-spacing: 0.51px;
+        text-transform: uppercase;
+      }
+      menu li img.hover
+      {
+        display: none;
+      }
+
+      menu li:hover
+      {
+        background-color: #6941C7;
+        color: #fff;
+      }
+      menu li:hover img
+      {
+        display: none;
+      }
+      menu li:hover img.hover
+      {
+        display: inline-block;
+      }
+
+      menu hr
+      {
+        width: 100%;
+        border-top: none;
+        border-right: none;
+        border-bottom: 1px solid #fff;
+        border-left: none;
+        opacity: 0.5;
+        flex-grow: 1;
+        margin: 0 0 40px 0;
+      }
+      menu div
+      {
+        height: 24px;
+        padding: 12px 40px 12px 40px;
+        margin: 38px 0 21px 0;
       }
     </style>
     <script type="module">
       //import Utils from "/lib/Utils.js";
       //import JW_Utils from "/lib/JW_Utils.js";
       import Admin from "/lib/Admin.js";
-      import "/component/DE_Header.mjs";
+      //import "/component/DE_Header.mjs";
 
       main();
       async function main()
@@ -49,7 +142,75 @@
   </head>
 
   <body>
-    <de-header id="DE_Header" frame-id="page_frame"></de-header>
-    <iframe id="page_frame"></iframe>
+    <header>
+      <h1>Project X</h1>
+      <de-lang></de-lang>
+      <de-account></de-account>
+    </header>
+    <main>
+      <nav>
+        <menu id="main_menu">
+          <header></header>
+          <li>
+            <img src="./image/property.svg">
+            <img src="./image/property-white.svg" class="hover">
+            <span>Properties</span>
+          </li>
+          <li>
+            <img src="./image/person.svg">
+            <img src="./image/person-white.svg" class="hover">
+            <span>Contacts</span>
+          </li>
+          <li>
+            <img src="./image/profile.svg">
+            <img src="./image/profile-white.svg" class="hover">
+            <span>Profile</span>
+          </li>
+          <li>
+            <img src="./image/ticket.svg">
+            <img src="./image/ticket-white.svg" class="hover">
+            <span>Tickets</span>
+            <menu id="ticket_menu" class="sub">
+              <li><span>Damage</span></li>
+              <li><span>Issue</span></li>
+              <li><span>Internal</span></li>
+            </menu>
+          </li>
+          <li>
+            <img src="./image/calendar.svg">
+            <img src="./image/calendar-white.svg" class="hover">
+            <span>Calendar</span>
+          </li>
+          <li>
+            <img src="./image/setting.svg">
+            <img src="./image/setting-white.svg" class="hover">
+            <span>Settings</span>
+          </li>
+          <li>
+            <img src="./image/admin.svg">
+            <img src="./image/admin-white.svg" class="hover">
+            <span>Admin</span>
+          </li>
+          <hr>
+          <li>
+            <img src="./image/faq.svg">
+            <img src="./image/faq-white.svg" class="hover">
+            <span>FAQ</span>
+          </li>
+          <li>
+            <img src="./image/policy.svg">
+            <img src="./image/policy-white.svg" class="hover">
+            <span>Policy</span>
+          </li>
+          <li>
+            <img src="./image/logout.svg">
+            <img src="./image/logout-white.svg" class="hover">
+            <span>Logout</span>
+          </li>
+          <div>©2022 Homesta</div>
+        </menu>
+      </nav>
+      <iframe id="page_frame"></iframe>
+    </main>
   </body>
 </html>

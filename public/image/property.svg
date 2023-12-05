@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg 
+  viewBox="9 8 47 50" 
+  xmlns="http://www.w3.org/2000/svg" 
+  stroke-width="4" 
+  stroke="#7C8592" 
+  fill="none"
+>
+  <path d=
+    "M 51.61,25.21, 33.2,11.4 
+    a 2,2,0,0,0-2.4,0
+    L 12.39,25.21
+    a 2,2,0,0,0-.8,1.6
+
+    V 53.45
+    a 2,2,0,0,0,2,2
+    H 25
+    a 2,2,0,0,0,2-2
+    V 45
+    a 2,2,0,0,1,2-2
+    h 7
+    a 2,2,0,0,1,2,2
+    v 8.45
+    a 2,2,0,0,0,2,2
+    H 50.41
+    a 2,2,0,0,0,2-2
+    V 26.81
+    A 2,2,0,0,0,51.61,25.21
+    Z"/>
+</svg>
