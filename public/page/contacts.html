@@ -1,49 +1,58 @@
 <html>
   <head>
     <link type="text/css" rel="stylesheet" href="../style/main.css" />
-    <link type="text/css" rel="stylesheet" href="../style/Form_Dlg.css" />
+    <link type="text/css" rel="stylesheet" href="../style/DE_Form_Dlg.css" />
     <link type="text/css" rel="stylesheet" href="../style/DE_Table.css" />
   </head>
 
   <script type="module">
     import Utils from "../lib/Utils.js";
     import Admin from "../lib/Admin.js";
-    import "../component/Form_Buddy.mjs";
-    import "../component/Form_Dlg.mjs";
+    import "../component/DE_Form_Dlg.mjs";
     import "../component/Input_Span.mjs";
     import "../component/DE_Table.mjs";
+    import "../component/DE_Select.mjs";
 
     Main();
     async function Main()
     {
       await Admin.Import_API();
 
-      show_add_btn.addEventListener("click", prop_dlg.On_New);
-      prop_dlg.addEventListener("save", On_Click_Save);
+      show_add_btn.addEventListener("click", dlg.On_New);
+      dlg.addEventListener("save", On_Click_Save);
 
       Table_Load();
+
+      document.getElementById("property_col").render_cell_fn = Render_Property_Cell;
+      property_input.options = await Property.Select_As_Options();
+    }
+
+    async function Render_Property_Cell(user)
+    {
+      const property = await Property.Select_By_Id(user.property_id);
+      return property?.address;
     }
 
     async function On_Click_Save()
     {
-      const property = prop_dlg.data;
-      if (property)
+      const obj = dlg.value;
+      if (obj)
       {
-        const id = await Property.Save(property);
+        const id = await User.Save(obj);
         if (id)
         {
           Table_Load();
         }
         else
         {
-          Utils.Handle_Errors(Property);
+          Utils.Handle_Errors(User);
         }
       }
     }
 
     async function Table_Load()
     {
-      table.value = await Property.Select();
+      table.value = await User.Select_Contacts();
     }
   </script>
 
@@ -51,7 +60,7 @@
 
     <article>
       <header>
-        <h2>Properties</h2>
+        <h2>Contacts</h2>
         <button id="sort_btn"><img src="../image/sort.svg"></button>
         <button id="filter_btn"><img src="../image/filter.svg"></button>
         <button id="show_add_btn"><img src="../image/add.svg"></button>
@@ -59,16 +68,41 @@
 
       <de-table id="table">
         <de-th name="id" has-label>Id</de-th>
+        <de-th name="name">Name</de-th>
+        <de-th name="email">E-Mail</de-th>
+        <de-th name="phone">Phone</de-th>
         <de-th name="address">Address</de-th>
+        <de-th id="property_col" has-label>Tenant At</de-th>
+        <de-th name="status" has-label>Status</de-th>
       </de-table>
     </article>
     
-    <form-dlg id="prop_dlg" title-text="Apartment Details">
+    <de-form-dlg id="dlg" title-text="Contact Details">
       <label for="id_input">ID</label>
       <input-span id="id_input" name="id" placeholder="N/A"></input-span>
+      
+      <label for="name_input">Name</label>
+      <input id="name_input" name="name" type="text">
+      
+      <label for="email_input">E-Mail</label>
+      <input id="email_input" name="email" type="email">
+      
+      <label for="phone_input">Phone</label>
+      <input id="phone_input" name="phone" type="tel">
+      
       <label for="addr_input">Address</label>
       <input id="addr_input" name="address" type="text">
-    </form-dlg>
+      
+      <label for="status_input">Status</label>
+      <select id="status_input" name="status">
+        <option></option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+      
+      <label for="property_input">Tenant At</label>
+      <de-select id="property_input" name="property_id"></de-select>
+    </de-form-dlg>
 
   </body>
 </html>

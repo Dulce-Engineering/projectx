@@ -1,8 +1,8 @@
 import Utils from "../lib/Utils.js";
 
-class Form_Buddy extends HTMLElement 
+class DE_Form extends HTMLElement 
 {
-  static tname = "form-buddy";
+  static tname = "de-form";
 
   Clr_Input()
   {
@@ -16,7 +16,7 @@ class Form_Buddy extends HTMLElement
     }
   }
 
-  Get_Input()
+  get value()
   {
     let res = null;
 
@@ -55,7 +55,7 @@ class Form_Buddy extends HTMLElement
     return res;
   }
 
-  Set_Input(data)
+  set value(data)
   {
     const elems = this.querySelectorAll("[name]");
     if (!Utils.isEmpty(elems))
@@ -89,6 +89,6 @@ class Form_Buddy extends HTMLElement
 
 }
 
-Utils.Register_Element(Form_Buddy);
+Utils.Register_Element(DE_Form);
 
-export default Form_Buddy;
+export default DE_Form;

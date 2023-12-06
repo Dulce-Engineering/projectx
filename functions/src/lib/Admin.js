@@ -10,6 +10,19 @@ class Admin
     return token?.uid;
   }
 
+  static async User(req, fb_auth, db, User)
+  {
+    let user = null;
+
+    const token = await Admin.Token(req, fb_auth);
+    if (token?.uid)
+    {
+      user = await User.Select_By_UID(db, token.uid);
+    }
+
+    return user;
+  }
+
   static async Has_Auth(req, fb_auth)
   {
     const token = await Admin.Token(req, fb_auth);

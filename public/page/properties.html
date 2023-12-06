@@ -1,15 +1,15 @@
 <html>
   <head>
     <link type="text/css" rel="stylesheet" href="../style/main.css" />
-    <link type="text/css" rel="stylesheet" href="../style/Form_Dlg.css" />
+    <link type="text/css" rel="stylesheet" href="../style/DE_Form_Dlg.css" />
     <link type="text/css" rel="stylesheet" href="../style/DE_Table.css" />
   </head>
 
   <script type="module">
     import Utils from "../lib/Utils.js";
     import Admin from "../lib/Admin.js";
-    import "../component/Form_Buddy.mjs";
-    import "../component/Form_Dlg.mjs";
+    import "../component/DE_Form.mjs";
+    import "../component/DE_Form_Dlg.mjs";
     import "../component/Input_Span.mjs";
     import "../component/DE_Table.mjs";
 
@@ -26,7 +26,7 @@
 
     async function On_Click_Save()
     {
-      const property = prop_dlg.data;
+      const property = prop_dlg.value;
       if (property)
       {
         const id = await Property.Save(property);
@@ -63,12 +63,12 @@
       </de-table>
     </article>
     
-    <form-dlg id="prop_dlg" title-text="Apartment Details">
+    <de-form-dlg id="prop_dlg" title-text="Apartment Details">
       <label for="id_input">ID</label>
       <input-span id="id_input" name="id" placeholder="N/A"></input-span>
       <label for="addr_input">Address</label>
       <input id="addr_input" name="address" type="text">
-    </form-dlg>
+    </de-form-dlg>
 
   </body>
 </html>

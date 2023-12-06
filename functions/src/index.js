@@ -22,6 +22,7 @@ app.use(cors());
 
 const on_auth_fn = (req) => Admin.Has_Auth(req, fb_auth);
 const uid = (req) => Admin.UID(req, fb_auth);
+const user = (req) => Admin.User(req, fb_auth, db, User);
 //Jobs.is_class = true;
 //Trend.is_class = true;
 const rpc_buddy = new RPC_Buddy
@@ -33,11 +34,15 @@ const rpc_buddy = new RPC_Buddy
     User, Property
   ],
   [
-    {name: "Property.Save", inject: [db, uid], on_auth_fn}, 
-    {name: "Property.Select", inject: [db, uid], on_auth_fn}, 
+    {name: "Property.Save", inject: [db, user], on_auth_fn}, 
+    {name: "Property.Select", inject: [db, user], on_auth_fn}, 
+    {name: "Property.Select_As_Options", inject: [db, user], on_auth_fn}, 
+    {name: "Property.Select_By_Id", inject: [db, user], on_auth_fn}, 
 
     {name: "User.Create", inject: [db, fb_auth]}, 
     {name: "User.Sign_In", inject: [db]}, 
+    {name: "User.Select_Contacts", inject: [db, user]}, 
+    {name: "User.Save", inject: [db, user]}, 
   ],
   RPC_Buddy.Express
 );

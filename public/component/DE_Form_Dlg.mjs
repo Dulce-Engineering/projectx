@@ -1,8 +1,9 @@
 import Utils from "../lib/Utils.js";
+import "../component/DE_Form.mjs";
 
-class Form_Dlg extends HTMLElement 
+class DE_Form_Dlg extends HTMLElement 
 {
-  static tname = "form-dlg";
+  static tname = "de-form-dlg";
 
   constructor()
   {
@@ -17,14 +18,14 @@ class Form_Dlg extends HTMLElement
 
   // Fields =============================================================================
 
-  get data()
+  get value()
   {
-    return this.form?.Get_Input();
+    return this.form?.value;
   }
 
-  set data(obj)
+  set value(obj)
   {
-    this.form.Set_Input(obj);
+    this.form.value = obj;
   }
 
   // Events =============================================================================
@@ -37,7 +38,7 @@ class Form_Dlg extends HTMLElement
 
   On_Edit(obj)
   {
-    this.form.Set_Input(obj);
+    this.form.value = obj;
     this.dlg.showModal();
   }
 
@@ -56,8 +57,8 @@ class Form_Dlg extends HTMLElement
     const html = `
       <dialog cid="dlg">
         <header cid="hdr"></header>
-        <form-buddy cid="form">
-        </form-buddy>
+        <de-form cid="form">
+        </de-form>
         <footer>
           <button cid="save_btn">Save</button>
           <button cid="cancel_btn">Cancel</button>
@@ -86,6 +87,6 @@ class Form_Dlg extends HTMLElement
   }
 }
 
-Utils.Register_Element(Form_Dlg);
+Utils.Register_Element(DE_Form_Dlg);
 
-export default Form_Dlg;
+export default DE_Form_Dlg;

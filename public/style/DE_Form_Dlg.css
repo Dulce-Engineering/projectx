@@ -14,12 +14,12 @@ xform-dlg button
   letter-spacing: 0.25px;
 }
 
-form-dlg footer
+de-form-dlg footer
 {
   display: flex;
 }
 
-form-dlg form-buddy
+de-form-dlg de-form
 {
   display: grid;
   grid-template-columns: 1fr 2fr;

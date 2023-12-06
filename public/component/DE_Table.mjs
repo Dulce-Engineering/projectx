@@ -13,18 +13,22 @@ class DE_Table extends HTMLElement
   set value(objs)
   {
     this.body.replaceChildren();
-    for (const obj of objs)
+    
+    if (!Utils.isEmpty(objs))
     {
-      const body_row = document.createElement("tr");
-      this.body.append(body_row);
-
-      const cols = this.head_row.querySelectorAll("th[name]");
-      for (const th of cols)
+      for (const obj of objs)
       {
-        const row_cell = document.createElement("td");
-        body_row.append(row_cell);
+        const body_row = document.createElement("tr");
+        this.body.append(body_row);
 
-        this.Render_Cell(row_cell, th, obj);
+        const cols = this.head_row.querySelectorAll("th");
+        for (const th of cols)
+        {
+          const row_cell = document.createElement("td");
+          body_row.append(row_cell);
+
+          this.Render_Cell(row_cell, th, obj);
+        }
       }
     }
   }
@@ -76,12 +80,14 @@ class DE_Table extends HTMLElement
       this.head_row.append(th);
 
       th.append(...col.childNodes);
+      //th.id = col.id;
+      this.Copy_Attr("id", col, th);
       this.Copy_Attr("name", col, th);
       this.Copy_Attr("has-label", col, th);
     }
   }
 
-  Render_Cell(cell, th, obj)
+  async Render_Cell(cell, th, obj)
   {
     if (th.hasAttribute("has-label"))
     {
@@ -91,9 +97,20 @@ class DE_Table extends HTMLElement
       cell.append(label);
     }
 
-    const field_name = th.getAttribute("name");
-    const field_value = obj[field_name];
-    cell.append(field_value);
+    let field_value = null;
+    if (th.render_cell_fn)
+    {
+      field_value = await th.render_cell_fn(obj);
+    }
+    else
+    {
+      const field_name = th.getAttribute("name");
+      field_value = obj[field_name];
+    }
+    if (!Utils.isEmpty(field_value))
+    {
+      cell.append(field_value);
+    }
   }
 }
 

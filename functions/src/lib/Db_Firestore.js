@@ -1,7 +1,24 @@
+/**
+ * module description
+ * @module Db_Firestore
+ */
+
 import Utils from "./Utils.js";
 
+/**
+ * @typedef {Object} Where_Condition
+ * @property {String} field - Field name
+ * @property {String} op - Condition operation
+ * @property {Object} value - Comparison value
+ */
+
+/** Db_Firestore description */
 class Db_Firestore
 {
+    /**
+   * constructor description
+   * @param  {Object} fb_db Firebase database object
+   */
   constructor(fb_db)
   {
     this.fb_db = fb_db || null;
@@ -53,6 +70,13 @@ class Db_Firestore
     return res;
   }
 
+  /**
+   * Returns a single object that satisfies the "where" conditions or null.
+   * @param {String} table_name 
+   * @param {Function} class_type 
+   * @param {Where_Condition[]} where 
+   * @returns Object
+   */
   async Select_Obj(table_name, class_type, where)
   {
     let res = null;
@@ -83,6 +107,13 @@ class Db_Firestore
     return objs;
   }
 
+  /**
+   * Returns a single object with a matching id.
+   * @param {String} id 
+   * @param {String} table_name 
+   * @param {Function} class_type 
+   * @returns Object
+   */
   async Select_Obj_By_Id(id, table_name, class_type)
   {
     let res = null;
@@ -108,7 +139,7 @@ class Db_Firestore
       {
         //const class_obj = new class_type(obj);
         const class_obj = await this.To_Class(obj, class_type);
-        console.log("class_obj: ", class_obj);
+        //console.log("class_obj: ", class_obj);
         res.push(class_obj);
       }
     }
@@ -283,7 +314,7 @@ class Db_Firestore
       {
         for (const row of rows)
         {
-          console.log("row: ", row);
+          //console.log("row: ", row);
           const doc_ref = await table.add(row);
           res.push(doc_ref.id);
         }
